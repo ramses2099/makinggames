@@ -9,7 +9,7 @@ def main():
     pg.init()
 
     fpsClock = pg.time.Clock()
-    DISPLAYSURF = pg.display.set_mode((400, 400))
+    DISPLAYSURF = pg.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pg.display.set_caption(TITLE)
 
     tankImg = pg.image.load(IMAGE)
