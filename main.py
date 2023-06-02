@@ -2,21 +2,26 @@ import pygame as pg
 import sys
 from pygame.locals import *
 from colors import *
-from constants import *
+from settings import *
 
+def showFPS(surface, dt, pos=(10,10)):
+    font = pg.font.Font(FONT_NAME,12)
+    text = font.render(f"FPS: {dt}",True,WHITE)
+    textRect = text.get_rect()
+    textRect.center = pos
+    surface.blit(text, textRect)
+    
 
 def main():
     pg.init()
 
     fpsClock = pg.time.Clock()
-    DISPLAYSURF = pg.display.set_mode((400, 400))
+    DISPLAYSURF = pg.display.set_mode(SCREEN_SIZE)
     pg.display.set_caption(TITLE)
-
-    tankImg = pg.image.load(IMAGE)
-    tankx = 10
-    tanky = 10
-
-    direction = "r"
+    
+    # DELTA TIME
+    dt = 0.0
+    fpsClock.tick(FPS)
 
     while True:
         for event in pg.event.get():
@@ -24,29 +29,16 @@ def main():
                 pg.quit()
                 sys.exit()
 
-        DISPLAYSURF.fill(WHITE)
-
-        if direction == "r":
-            tankx += 5
-            if tankx == 280:
-                direction = "d"
-        elif direction == "d":
-            tanky += 5
-            if tanky == 220:
-                direction = "l"
-        elif direction == "l":
-            tankx -= 5
-            if tankx == 10:
-                direction = "u"
-        elif direction == "u":
-            tanky -= 5
-            if tanky == 10:
-                direction = "r"
-
-        DISPLAYSURF.blit(tankImg, (tankx, tanky))
-
+        DISPLAYSURF.fill(BLACK)
+        
+        # draw
+        if DEBUG:
+            showFPS(DISPLAYSURF, dt,(35,10))
+        # update
+        
+        
         pg.display.update()
-        fpsClock.tick(FPS)
+        dt = fpsClock.tick(FPS)/1000.0
 
 
 if __name__ == "__main__":
