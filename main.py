@@ -5,6 +5,10 @@ from colors import *
 from settings import *
 from vec2 import Vec2
 
+# test entity
+from entity import Entity 
+
+
 def showFPS(surface, dt, pos=(10,10)):
     font = pg.font.Font(FONT_NAME,12)
     text = font.render(f"FPS: {dt}",True,WHITE)
@@ -22,14 +26,8 @@ def main():
     
     #TEST VEC2
     v1 = Vec2(70.0, 70.0)
-    v1.add(Vec2(50.0,50.0))
-    v1.print()
+    entity01 = Entity(v1, BLUE)
     
-    print(f"mag:{v1.mag()}")
-    
-    v2 = Vec2(100, 100)
-    dist = v1.dist(v2)
-    print(f"dist:{dist}")
     
     # DELTA TIME
     dt = 0.0
@@ -43,12 +41,17 @@ def main():
 
         DISPLAYSURF.fill(BLACK)
         
+        # update
+        entity01.update(dt)
+        
+        
         # draw
         if DEBUG:
             showFPS(DISPLAYSURF, dt,(35,10))
         
-        # update
         
+        
+        entity01.draw(DISPLAYSURF)        
         
         pg.display.update()
         dt = fpsClock.tick(FPS)/1000.0
