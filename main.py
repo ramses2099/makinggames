@@ -3,6 +3,7 @@ import sys
 from pygame.locals import *
 from colors import *
 from constants import *
+from pygame.math import Vector2 as vec
 
 
 def main():
@@ -12,11 +13,11 @@ def main():
     DISPLAYSURF = pg.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pg.display.set_caption(TITLE)
 
-    tankImg = pg.image.load(IMAGE)
-    tankx = 10
-    tanky = 10
+    rect1 = pg.Rect(50, 50, 50, 50)
+    x_speed, y_speed = 5, 4
 
-    direction = "r"
+    rect2 = pg.Rect(500, 100, 50, 50)
+    other_speed = 3
 
     while True:
         for event in pg.event.get():
@@ -24,26 +25,15 @@ def main():
                 pg.quit()
                 sys.exit()
 
-        DISPLAYSURF.fill(WHITE)
+        DISPLAYSURF.fill(BLACK)
 
-        if direction == "r":
-            tankx += 5
-            if tankx == 280:
-                direction = "d"
-        elif direction == "d":
-            tanky += 5
-            if tanky == 220:
-                direction = "l"
-        elif direction == "l":
-            tankx -= 5
-            if tankx == 10:
-                direction = "u"
-        elif direction == "u":
-            tanky -= 5
-            if tanky == 10:
-                direction = "r"
+        # update
 
-        DISPLAYSURF.blit(tankImg, (tankx, tanky))
+        # draw
+        pg.draw.rect(DISPLAYSURF, WHITE, rect1)
+        pg.draw.rect(DISPLAYSURF, BLUE, rect2)
+
+        pg.display.flip()
 
         pg.display.update()
         fpsClock.tick(FPS)

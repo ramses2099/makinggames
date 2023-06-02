@@ -1,5 +1,7 @@
 FPS = 30  # frames per seconds setting
 WINDOWWIDTH = 640
 WINDOWHEIGHT = 480
+WINDOWCENTERX = WINDOWWIDTH / 2
+WINDOWCENTERY = WINDOWHEIGHT / 2
 TITLE = "Animation"
 IMAGE = "images\\tankGreen.png"
